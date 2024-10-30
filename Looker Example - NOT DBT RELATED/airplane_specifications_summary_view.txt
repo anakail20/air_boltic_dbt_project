@@ -1,0 +1,39 @@
+# views/airplane_specifications_summary.view.lkml
+
+view: airplane_specifications_summary {
+  sql_table_name: `your_project.airplane_specifications_summary` ;;
+
+  dimension: manufacturer {
+    primary_key: yes
+    type: string
+    description: "The manufacturer of the airplane models included in this summary, such as Boeing, Airbus, or Embraer."
+    sql: ${TABLE}.manufacturer ;;
+  }
+
+  measure: avg_max_seats {
+    type: average
+    description: "Average maximum seating capacity of the airplane models by this manufacturer. Provides insight into typical passenger capacities across models."
+    sql: ${TABLE}.avg_max_seats ;;
+    value_format: "#,##0"
+  }
+
+  measure: avg_max_weight {
+    type: average
+    description: "Average maximum takeoff weight (in kg) across all models by this manufacturer. Useful for comparing airplane weight capacities between manufacturers."
+    sql: ${TABLE}.avg_max_weight ;;
+    value_format: "#,##0 kg"
+  }
+
+  measure: avg_max_distance {
+    type: average
+    description: "Average maximum range (in kilometers) across all airplane models by this manufacturer. Indicates the general flight range capability of this manufacturer’s lineup."
+    sql: ${TABLE}.avg_max_distance ;;
+    value_format: "#,##0 km"
+  }
+
+  measure: model_count {
+    type: count
+    description: "Number of unique airplane models produced by this manufacturer. Reflects the diversity of airplane types available from the manufacturer."
+    sql: ${TABLE}.model_count ;;
+  }
+}

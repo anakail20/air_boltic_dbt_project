@@ -1,0 +1,11 @@
+# explores/airplane_analysis.explore.lkml
+
+explore: airplane_analysis {
+
+  from: airplane_usage
+
+  join: airplane_specifications_summary {
+    sql_on: ${airplane_usage.manufacturer} = ${airplane_specifications_summary.manufacturer} ;;
+    relationship: many_to_one
+  }
+}

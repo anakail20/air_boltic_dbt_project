@@ -1,0 +1,64 @@
+# views/airplane_usage.view.lkml
+
+view: airplane_usage {
+  sql_table_name: `your_project.airplane_usage` ;;
+
+  dimension: airplane_id {
+    primary_key: yes
+    type: number
+    description: "Unique identifier for each airplane in the system, used to distinguish individual airplanes."
+    sql: ${TABLE}.airplane_id ;;
+  }
+
+  dimension: airplane_model {
+    type: string
+    description: "Model name of the airplane, such as '737-800' or 'A320neo'. This indicates the specific version within the manufacturer's lineup."
+    sql: ${TABLE}.airplane_model ;;
+  }
+
+  dimension: manufacturer {
+    type: string
+    description: "The manufacturer of the airplane, such as Boeing, Airbus, or Embraer. Provides context on the origin of the airplane model."
+    sql: ${TABLE}.manufacturer ;;
+  }
+
+  dimension: max_seats {
+    type: number
+    description: "Maximum seating capacity of the airplane model. Indicates the highest number of passengers the airplane can accommodate."
+    sql: ${TABLE}.max_seats ;;
+    value_format: "#,##0"
+  }
+
+  dimension: max_weight {
+    type: number
+    description: "Maximum takeoff weight (in kg) of the airplane, representing the heaviest allowable weight. It includes passengers, cargo, and fuel."
+    sql: ${TABLE}.max_weight ;;
+    value_format: "#,##0 kg"
+  }
+
+  dimension: max_distance {
+    type: number
+    description: "Maximum flying distance of the airplane model (in kilometers). This reflects the maximum range the airplane can travel on a full tank."
+    sql: ${TABLE}.max_distance ;;
+    value_format: "#,##0 km"
+  }
+
+  dimension: engine_type {
+    type: string
+    description: "Type of engine powering the airplane model, e.g., 'CFM56-7B'. Indicates the model and series of the engine."
+    sql: ${TABLE}.engine_type ;;
+  }
+
+  measure: total_trips {
+    type: count
+    description: "Total number of trips completed by the airplane. Reflects the utilization of each airplane model."
+    sql: ${TABLE}.total_trips ;;
+  }
+
+  measure: total_revenue {
+    type: sum
+    description: "Total revenue generated from all trips by this airplane model, calculated in euros (EUR)."
+    sql: ${TABLE}.total_revenue ;;
+    value_format: "€#,##0"
+  }
+}
