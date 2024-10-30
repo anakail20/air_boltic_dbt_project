@@ -1,0 +1,59 @@
+---
+version: 2
+sources:
+  - name: raw_layer
+    meta:
+      external_location: ./raw_data/{name}
+    description: Data from external sources, brought in by an EL process.
+    tables:
+      - name: customers
+        identifier: customer
+        config:
+          tags: [raw_layer]
+        columns:
+          - name: customer_id
+            tests: [not_null]
+          - name: customer_group
+            tests:
+              - relationships:
+                  to: source('raw_layer', 'customers')
+                  field: id
+
+      - name: customer_groups
+        identifier: customer_group        
+        config:
+          tags: [raw_layer]
+        columns:
+          - name: id
+            tests: [not_null, unique]
+
+      - name: aeroplanes
+        identifier: aeroplane        
+        config:
+          tags: [raw_layer]
+        columns:
+          - name: airplane_id
+            tests: [not_null, unique]
+
+
+      - name: trips
+        identifier: trip        
+        config:
+          tags: [raw_layer]
+        columns:
+          - name: trip_id
+            tests: [not_null, unique]
+
+      - name: orders
+        identifier: order        
+        config:
+          tags: [raw_layer]
+        columns:
+          - name: order_id
+            tests: [not_null, unique]
+
+      - name: aeroplane_model
+        description: JSON file containing detailed specifications of various aircraft models.
+        config:
+          tags: [raw_layer]
+          format: json
