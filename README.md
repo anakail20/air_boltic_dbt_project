@@ -16,8 +16,7 @@ The primary goal of this project is to transform raw airplane data into analysis
 
 - **models/staging**: Contains staging models for transforming raw JSON and Excel files into a clean, usable format.
 - **models/marts**: Aggregated models for data marts. Each mart model is designed to provide specific insights and KPIs.
-- **views/**: LookML view files for defining fields and measures in Looker.
-- **explores/**: LookML explore files for joining related views and creating analysis-ready data structures.
+- **LookML Example**: LookML view files for defining fields and measures in Looker. Also LookML explore files for joining related views and creating analysis-ready data structures.
 
 ### Key Features
 
