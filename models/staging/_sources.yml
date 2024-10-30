@@ -13,10 +13,10 @@ sources:
         columns:
           - name: customer_id
             tests: [not_null]
-          - name: customer_group
+          - name: customer_group_id
             tests:
               - relationships:
-                  to: source('raw_layer', 'customers')
+                  to: source('raw_layer', 'customer_groups')
                   field: id
 
       - name: customer_groups
@@ -27,7 +27,7 @@ sources:
           - name: id
             tests: [not_null, unique]
 
-      - name: aeroplanes
+      - name: airplanes
         identifier: aeroplane        
         config:
           tags: [raw_layer]
@@ -57,3 +57,17 @@ sources:
         config:
           tags: [raw_layer]
           format: json
+        columns:
+          - name: manufacturer
+            description: The manufacturer of the airplane.
+            tests: [not_null]
+          - name: airplane_model
+            description: The model name of the airplane.
+          - name: max_seats
+            description: Maximum seating capacity of the airplane.
+          - name: max_weight
+            description: Maximum takeoff weight of the airplane.
+          - name: max_distance
+            description: Maximum flying distance in kilometers.
+          - name: engine_type
+            description: The type of engine used in the airplane.
