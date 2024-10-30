@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: order_summary
+    description: "Summary of each order with associated trip and airplane details."
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order."
+        tests:
+          - not_null
+          - unique
+          - dbt_expectations.expect_column_values_to_be_in_type_list:
+              type_list: ["integer"]
+
+      - name: customer_id
+        description: "Identifier for the customer who placed the order."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_in_type_list:
+              type_list: ["integer"]
+
+      - name: trip_id
+        description: "Identifier for the trip associated with the order."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_in_type_list:
+              type_list: ["integer"]
+
+      - name: order_value
+        description: "The total value of the order in EUR."
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: order_status
+        description: "Status of the order (e.g., Finished, Pending)."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ["Finished", "Pending"]
+
+      - name: origin_city
+        description: "Origin city for the trip associated with the order."
+
+      - name: destination_city
+        description: "Destination city for the trip associated with the order."
+
+      - name: airplane_model
+        description: "Model of the airplane used for the trip."
+
+      - name: manufacturer
+        description: "Manufacturer of the airplane used for the trip."
