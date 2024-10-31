@@ -1,4 +1,3 @@
--- models/staging/stg_customer_group.sql
 {{ config(materialized='view') }}
 
 SELECT 
