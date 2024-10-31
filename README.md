@@ -10,7 +10,7 @@ The project transforms raw data into analysis-ready tables and visualizations to
 
 - **models/staging**: Transforms raw JSON and Excel files into clean, usable tables.
 - **models/marts**: Aggregates data for usage, revenue, and specifications, providing key KPIs for reporting.
-- **LookML**: Defines Looker views and explores to visualize airplane metrics.
+- **Looker Example - NOT DBT RELATED**: Defines Looker views and explores to visualize airplane metrics.
 
 ## Key Models
 
