@@ -1,38 +1,39 @@
 # Airplane Data Analytics Repository
 
-This repository contains dbt models and LookML views for analyzing airplane data, including usage, specifications, and revenue insights.
+This repository contains dbt models and LookML views to analyze airplane data, including usage, specifications, and revenue insights.
 
 ## Overview
 
-The project transforms raw data into analysis-ready tables and visualizations to facilitate insights into airplane utilization, specifications, and revenue by different models and manufacturers.
+The project turns raw airplane data into tables and visualizations to help understand airplane usage, specifications, and revenue by model and manufacturer.
 
 ## Project Structure
 
-- **models/staging**: Transforms raw JSON and Excel files into clean, usable tables.
-- **models/marts**: Aggregates data for usage, revenue, and specifications, providing key KPIs for reporting.
-- **Looker Example - NOT DBT RELATED**: Defines Looker views and explores to visualize airplane metrics.
+- **models/staging**: Cleans and prepares raw JSON and Excel files for analysis.
+- **models/marts**: Aggregated models for specific insights and reporting.
+- **Looker Example**: Looker views and explores for visualizing airplane metrics.
 
 ## Key Models
 
-1. **Staging Models**: Prepare raw data, normalizing JSON structures and performing basic transformations.
-2. **Mart Models**: Aggregate and enhance data for specific insights, including:
-   - **`airplane_usage`**: Aggregates usage metrics by model, with trip counts and revenue data.
-   - **`airplane_specifications_summary`**: Summarizes specifications by manufacturer, averaging metrics like seat capacity and range.
-   - **`trip_analytics`**: Provides insights into demand, revenue, and trip duration by route.
-   - **`customer_insights`**: Aggregates customer data, supporting segmentation and profiling.
+1. **Staging Models**: Prepares raw data, including JSON parsing and data cleanup.
+2. **Mart Models**: Provides specific analysis areas:
+   - **`airplane_usage`**: Tracks usage by model, showing trip counts and revenue.
+   - **`airplane_specifications_summary`**: Summarizes specs by manufacturer, including average seat capacity and range.
+   - **`trip_analytics`**: Shows demand, revenue, and trip duration by route.
+   - **`customer_insights`**: Aggregates customer data for segmentation and profiling.
+   - **`order_summary`**: Combines orders, trips, and airplanes for a full view of revenue and trip details.
+
+> **Note**: `.yml` files are only created for some marts models. Automating `.yml` generation would help with consistency.
 
 ## Features
 
-- **Partitioned, Modular Design**: Each model uses modular CTEs, ensuring scalability and easy debugging.
-- **Data Quality Testing**: dbt tests validate source integrity, with additional range and uniqueness tests using `dbt-expectations`.
-- **LookML Documentation**: Descriptions for dimensions and measures in Looker, aiding end-users.
+- **Modular Design**: Each model uses separate parts to keep things organized and easy to update.
+- **Data Quality Tests**: Tests are added to check for things like unique IDs and valid data ranges.
 
 ## Future Improvements
 
-1. **Macros for Repeated Code**: Introduce macros for frequent operations (e.g., type casting) to increase code maintainability.
-2. **Enhanced Testing**: Expand tests, such as ensuring `price` values are always greater than zero, using `dbt-expectations`.
-3. **Optimize Materialization**: Currently, models are materialized as views. For scalability:
-   - Use tables or incremental models for frequently accessed or periodically updated data, improving performance in Databricks.
-4. **Environment-Specific Configurations**: Use `dbt`’s `vars` block for smooth transitions between environments (e.g., dev and prod), simplifying configurations and managing variables.
+1. **Add More Macros**: Use macros for common operations, like casting, to keep code clean.
+2. **Add More Tests**: For example, ensure prices are always greater than zero.
+3. **Optimize Materialization**: Currently, models are views. Consider using tables or incremental models for better performance as data grows.
+4. **Environment Configurations**: Use dbt’s `vars` block for settings that change between environments (e.g., dev and prod) to simplify management.
 
-This setup supports efficient analysis and reporting of airplane usage and performance metrics, ensuring data quality and flexibility for various use cases in Looker.
+This setup supports effective analysis and reporting of airplane data for insights into usage and performance.
