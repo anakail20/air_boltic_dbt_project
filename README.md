@@ -37,3 +37,45 @@ The project turns raw airplane data into tables and visualizations to help under
 4. **Environment Configurations**: Use dbt’s `vars` block for settings that change between environments (e.g., dev and prod) to simplify management.
 
 This setup supports effective analysis and reporting of airplane data for insights into usage and performance.
+
+
+# Part 2
+
+## Ideal CI/CD Process (Unlimited Resources)
+
+With no tooling or resource limitations, the ideal CI/CD process would include the following:
+
+### Environments
+1. **Development**: For local testing of changes, developers can work independently on feature branches.
+2. **Testing/Staging**: A staging environment mirrors production to validate model changes with real-like data.
+3. **Production**: The live environment, where only thoroughly tested changes are deployed.
+
+### Processes and Tools
+1. **Automated Testing**
+   - **Data Quality Tests**: Tests such as `not_null`, `unique`, and range tests (e.g., prices > 0) validate data integrity.
+   - **Integration Tests**: Check end-to-end pipeline functionality, confirming that changes in one model don’t break downstream dependencies.
+
+2. **Data Validation**: Automated comparison checks to verify row counts, summary statistics, and key metrics between the staging and production datasets to ensure consistency.
+
+3. **Version Control and Code Review**: 
+   - Implement automated linting for SQL formatting and structure consistency, like sqlfluff
+
+4. **Data Observability and Monitoring**:
+   - Monitoring tools (e.g., Validio) to track changes, detect anomalies, and alert for any data issues post-deployment.
+
+### Real-World CI/CD Process (Resource Constraints)
+
+In real-world scenarios where resources and tools may be limited, a streamlined CI/CD process would focus on essential elements:
+
+1. **Simplified Environments**:
+   - **Development and Production** only: Use a single development environment with small sample datasets for testing, then deploy directly to production with careful scheduling.
+   
+2. **Testing**:
+   - **Key Tests Only**: Focus on essential tests (e.g., `not_null`, `unique`, range checks) using dbt's in-built testing capabilities.
+   
+3. **Manual Deployment with Rollback**:
+   - Perform deployments manually, at scheduled times to avoid impacting users, with a clear rollback plan for quick recovery if issues arise.
+
+4. **Monitoring & Alerting**:
+   - Set up simple alerts (e.g., on key metrics) using basic data dashboards or Looker to catch significant issues.
+
