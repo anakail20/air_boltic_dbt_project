@@ -4,7 +4,7 @@ This repository contains dbt models and LookML views to analyze airplane data, i
 
 ## Overview
 
-The project turns raw airplane data into tables and visualizations to help understand airplane usage, specifications, and revenue by model and manufacturer.
+The project turns raw airplane data into tables and visualizations to help understand airplane usage, specifications, and revenue by model and manufacturer. ERD has also been created by using Excalidraw.
 
 ## Project Structure
 
